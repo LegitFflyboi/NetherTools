@@ -33,7 +33,14 @@ public class Main {
 		System.out.println("[INFO/Hack Thread -> " + clazz + "] " + text);
 	}
 	
-	public boolean getEnabled(){
+	public String getColoredStatus(){
+		if(this.isEnabled()){
+			return "§aEnabled§r";
+		}
+		return "§cDisabled§r";
+	}
+	
+	public boolean isEnabled(){
 		return this.enabled;
 	}
 	

@@ -27,6 +27,7 @@ import net.minecraft.world.storage.WorldInfo;
 import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.cloudchan.resilient.core.SettingsMenu;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
@@ -164,7 +165,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
+    @SuppressWarnings("unchecked")
+	public void initGui()
     {
         this.viewportTexture = new DynamicTexture(256, 256);
         this.field_110351_G = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);
@@ -198,9 +200,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         int var3 = this.height / 4 + 48;
 
         this.addSingleplayerMultiplayerButtons();
-
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var3 + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var3 + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
+        
+        this.buttonList.add(new GuiButton(0, this.width-120, 3, 60, 20, I18n.format("menu.options", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width-54, 3, 50, 20, I18n.format("menu.quit", new Object[0])));
         
         // Remove annoying language button
         // this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var3 + 72 + 12));
@@ -225,9 +227,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     @SuppressWarnings("unchecked")
 	private void addSingleplayerMultiplayerButtons()
     {
-        this.buttonList.add(new GuiButton(1,4, 3, 100, 20, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, 108, 3, 100, 20, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(this.field_175372_K = new GuiButton(14, 212, 3, 100, 20, "Resilient"));
+        this.buttonList.add(new GuiButton(1,4, 3, 60, 20, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, 70, 3, 50, 20, I18n.format("menu.multiplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(14, 126, 3, 60, 20, "§bResilient§r"));
         
     }
 
@@ -236,11 +238,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         if (button.id == 0)
         {
             this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
-        }
-
-        if (button.id == 5)
-        {
-            this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));
         }
 
         if (button.id == 1)
@@ -256,6 +253,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         if (button.id == 14)
         {
             // Launch Resilient Options
+        	this.mc.displayGuiScreen(new SettingsMenu(this));
         }
 
         if (button.id == 4)
@@ -509,24 +507,26 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, 252);
         GlStateManager.popMatrix();
         
-        String var10 = "§7Minecraft 1.8 §o(Hacked)§r";
+        String var10 = "§7Minecraft 1.8 (Cheats: " + this.mc.resilient.getColoredStatus().toUpperCase() + "§7)§r";
         this.drawString(this.fontRendererObj, var10, 2, this.height - 10, -1);
         
         String var11 = "§b§nhttps://cloudchan.org/§r";
         this.drawString(this.fontRendererObj, var11, this.width - this.fontRendererObj.getStringWidth(var11) - 2, this.height - 10, -1);
         
-        String var12 = "§cCreated by Notch§r";
+        String var12 = "§5Founded by Notch§r";
         this.drawString(this.fontRendererObj, var12, 2, this.height - 20, -1);
         
+        String var13 = "§c§mMicrosoft(c)§r";
+        this.drawString(this.fontRendererObj, var13, 2, this.height - 30, -1);
         
         GlStateManager.pushMatrix();
         GlStateManager.scale(1.8f,2.4f,1.0f);
-        GlStateManager.translate(-16f, 0.0f, 0.0f);
+        GlStateManager.translate(16.5f, 0.0f, 0.0f);
         
         int x = (this.width / 4);
         int y = (this.height / 4);
-        this.drawString(this.fontRendererObj, "§6§l" + this.mc.resilient.NAME + " " + this.mc.resilient.VERSION + "§r", x, y, -1);
-        
+        //this.drawString(this.fontRendererObj, "§6§l" + this.mc.resilient.NAME + " " + this.mc.resilient.VERSION + "§r", x, y, -1);
+        this.drawCenteredString(this.fontRendererObj, "§2§l" + this.mc.resilient.NAME + " " + this.mc.resilient.VERSION + "§r", x, y, -1);
         
         GlStateManager.popMatrix();
         

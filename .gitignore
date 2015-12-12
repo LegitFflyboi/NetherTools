@@ -1,0 +1,6 @@
+*crash-reports/
+*.project*
+*.settings/*
+*.settings*
+*bin/*
+*bin*

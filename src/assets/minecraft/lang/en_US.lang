@@ -22,9 +22,9 @@ translation.test.invalid2=hi %  s
 translation.test.args=%s %s
 translation.test.world=world
 
-menu.game=Game menu
-menu.singleplayer=Singleplayer
-menu.multiplayer=Multiplayer
+menu.game=Paused
+menu.singleplayer=My Worlds
+menu.multiplayer=Servers
 menu.online=
 menu.options=Settings
 menu.quit=Exit
