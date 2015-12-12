@@ -1,0 +1,85 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 12/12/15 4:26 AM
+Description: Updating screen events
+
+java.lang.IllegalStateException: Keyboard must be created before you can query key state
+	at org.lwjgl.input.Keyboard.isKeyDown(Keyboard.java:406)
+	at net.minecraft.client.gui.GuiScreen.isCtrlKeyDown(GuiScreen.java:709)
+	at net.minecraft.client.gui.GuiTextField.textboxKeyTyped(GuiTextField.java:378)
+	at com.Resilient.gui.ResiChat.keyTyped(ResiChat.java:142)
+	at net.minecraft.client.gui.GuiScreen.handleKeyboardInput(GuiScreen.java:611)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:562)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1785)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1118)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:418)
+	at net.minecraft.client.main.Main.main(Main.java:114)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at org.lwjgl.input.Keyboard.isKeyDown(Keyboard.java:406)
+	at net.minecraft.client.gui.GuiScreen.isCtrlKeyDown(GuiScreen.java:709)
+	at net.minecraft.client.gui.GuiTextField.textboxKeyTyped(GuiTextField.java:378)
+	at com.Resilient.gui.ResiChat.keyTyped(ResiChat.java:142)
+	at net.minecraft.client.gui.GuiScreen.handleKeyboardInput(GuiScreen.java:611)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:562)
+
+-- Affected screen --
+Details:
+	Screen name: com.Resilient.gui.ResiChat
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player748'/396, l='MpServer', x=170.13, y=68.00, z=227.06]]
+	Chunk stats: MultiplayerChunkCache: 361, 361
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: 156.00,64.00,244.00 - World: (156,64,244), Chunk: (at 12,4,4 in 9,15; contains blocks 144,0,240 to 159,255,255), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 2958 game time, 2958 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 59 total; [EntityZombie['Zombie'/221, l='MpServer', x=102.50, y=16.00, z=157.50], EntityZombie['Zombie'/222, l='MpServer', x=102.09, y=16.00, z=159.34], EntityZombie['Zombie'/223, l='MpServer', x=102.50, y=16.00, z=158.50], EntityFallingBlock['Falling Block'/216, l='MpServer', x=87.50, y=37.00, z=357.50], EntityFallingBlock['Falling Block'/212, l='MpServer', x=88.50, y=12.00, z=365.50], EntityFallingBlock['Falling Block'/213, l='MpServer', x=87.50, y=12.00, z=365.50], EntityFallingBlock['Falling Block'/214, l='MpServer', x=88.50, y=12.00, z=367.50], EntityFallingBlock['Falling Block'/215, l='MpServer', x=87.50, y=37.00, z=358.50], EntityFallingBlock['Falling Block'/211, l='MpServer', x=88.50, y=12.00, z=366.50], EntitySkeleton['Skeleton'/239, l='MpServer', x=124.50, y=23.00, z=243.50], EntityZombie['Zombie'/238, l='MpServer', x=128.25, y=24.00, z=230.09], EntityZombie['Zombie'/237, l='MpServer', x=127.50, y=24.00, z=225.50], EntityCreeper['Creeper'/236, l='MpServer', x=112.50, y=25.00, z=170.50], EntityCreeper['Creeper'/235, l='MpServer', x=117.50, y=24.00, z=169.50], EntityCreeper['Creeper'/234, l='MpServer', x=118.26, y=22.00, z=165.56], EntityZombie['Zombie'/224, l='MpServer', x=102.56, y=16.00, z=161.00], EntityCow['Cow'/254, l='MpServer', x=146.53, y=74.00, z=156.50], EntityCow['Cow'/255, l='MpServer', x=145.44, y=75.00, z=156.50], EntityCow['Cow'/246, l='MpServer', x=141.47, y=78.00, z=155.34], EntityCow['Cow'/247, l='MpServer', x=141.50, y=78.00, z=156.53], EntityItem['item.item.seeds'/240, l='MpServer', x=123.16, y=63.00, z=260.66], EntitySquid['Squid'/241, l='MpServer', x=111.91, y=59.00, z=276.47], EntityChicken['Chicken'/279, l='MpServer', x=175.50, y=69.00, z=273.50], EntityChicken['Chicken'/278, l='MpServer', x=175.50, y=69.00, z=271.50], EntityCreeper['Creeper'/277, l='MpServer', x=174.50, y=33.00, z=161.50], EntityChicken['Chicken'/283, l='MpServer', x=165.50, y=70.00, z=307.50], EntityChicken['Chicken'/282, l='MpServer', x=162.75, y=70.00, z=306.47], EntityChicken['Chicken'/281, l='MpServer', x=165.50, y=70.00, z=305.50], EntityChicken['Chicken'/280, l='MpServer', x=165.50, y=70.00, z=306.50], EntityBat['Bat'/258, l='MpServer', x=147.34, y=19.02, z=291.59], EntitySkeleton['Skeleton'/259, l='MpServer', x=147.50, y=19.00, z=293.50], EntitySkeleton['Skeleton'/256, l='MpServer', x=146.88, y=43.00, z=236.41], EntityBat['Bat'/257, l='MpServer', x=164.80, y=45.03, z=268.79], EntitySkeleton['Skeleton'/260, l='MpServer', x=149.47, y=19.00, z=293.91], EntityBat['Bat'/261, l='MpServer', x=137.50, y=22.31, z=283.44], EntityChicken['Chicken'/304, l='MpServer', x=176.50, y=63.00, z=272.50], EntityCreeper['Creeper'/319, l='MpServer', x=198.50, y=48.00, z=197.50], EntityBat['Bat'/297, l='MpServer', x=184.21, y=24.43, z=153.10], EntitySkeleton['Skeleton'/298, l='MpServer', x=186.19, y=23.00, z=167.06], EntityPig['Pig'/299, l='MpServer', x=187.50, y=76.00, z=207.50], EntityPig['Pig'/300, l='MpServer', x=190.50, y=69.00, z=206.50], EntityPig['Pig'/301, l='MpServer', x=189.50, y=74.00, z=209.50], EntityZombie['Zombie'/302, l='MpServer', x=182.29, y=52.00, z=242.60], EntitySquid['Squid'/303, l='MpServer', x=190.16, y=59.56, z=272.50], EntitySpider['Spider'/349, l='MpServer', x=239.50, y=17.00, z=253.50], EntitySpider['Spider'/348, l='MpServer', x=225.50, y=13.00, z=250.50], EntitySquid['Squid'/324, l='MpServer', x=197.50, y=58.00, z=269.75], EntitySquid['Squid'/325, l='MpServer', x=194.47, y=57.97, z=269.56], EntitySkeleton['Skeleton'/322, l='MpServer', x=194.50, y=48.00, z=244.50], EntitySquid['Squid'/323, l='MpServer', x=194.47, y=57.00, z=267.56], EntityCreeper['Creeper'/320, l='MpServer', x=198.53, y=44.00, z=199.31], EntityPig['Pig'/321, l='MpServer', x=193.50, y=68.00, z=210.50], EntityBat['Bat'/334, l='MpServer', x=203.88, y=15.01, z=200.42], EntitySkeleton['Skeleton'/332, l='MpServer', x=212.50, y=22.00, z=153.50], EntityBat['Bat'/333, l='MpServer', x=218.41, y=13.10, z=210.00], EntitySkeleton['Skeleton'/331, l='MpServer', x=212.16, y=22.00, z=156.50], EntityEnderman['Enderman'/356, l='MpServer', x=244.96, y=18.19, z=257.42], EntityPlayerSP['Player748'/396, l='MpServer', x=170.13, y=68.00, z=227.06], EntitySpider['Spider'/493, l='MpServer', x=131.50, y=54.00, z=188.50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:391)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2732)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:439)
+	at net.minecraft.client.main.Main.main(Main.java:114)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.7.0_17, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 241017752 bytes (229 MB) / 758382592 bytes (723 MB) up to 1905197056 bytes (1816 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	Launched Version: Resilient
+	LWJGL: 2.9.0
+	OpenGL: GeForce GTX 660 Ti/PCIe/SSE2 GL version 4.5.0 NVIDIA 359.06, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)

@@ -1,17 +1,5 @@
 package net.minecraft.client;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Queues;
-import com.google.common.collect.Sets;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.mojang.authlib.properties.Property;
-import com.mojang.authlib.properties.PropertyMap;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +23,9 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
+
 import javax.imageio.ImageIO;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -166,6 +156,7 @@ import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -183,6 +174,20 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
+
+import com.Resilient.Resilient;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Queues;
+import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.properties.PropertyMap;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {
@@ -346,6 +351,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     /** Profiler currently displayed in the debug screen pie chart */
     private String debugProfilerName = "root";
     private static final String __OBFID = "CL_00000631";
+    
+    /** Resilient */
+    private Resilient core;
 
     public Minecraft(GameConfiguration p_i45547_1_)
     {
@@ -553,6 +561,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.checkGLError("Post startup");
         this.ingameGUI = new GuiIngame(this);
 
+        // ==== Resilient ==== \\
+        core = new Resilient(this, ingameGUI);
+        
         if (this.serverName != null)
         {
             this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
@@ -608,8 +619,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
     private void func_175609_am() throws LWJGLException
     {
+    	// ==== Resilient ==== \\
+    	
         Display.setResizable(true);
-        Display.setTitle("Minecraft 1.8");
+        Display.setTitle(Resilient.CLIENT_TITLE + " " + Resilient.STAGE);
 
         try
         {
@@ -1066,6 +1079,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         this.mcProfiler.startSection("root");
 
+        // ==== Resilient ==== \\
+        if(core != null){ core.update(); }
+        
         if (Display.isCreated() && Display.isCloseRequested())
         {
             this.shutdown();

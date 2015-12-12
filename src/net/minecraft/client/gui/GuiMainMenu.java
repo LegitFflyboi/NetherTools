@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import com.Resilient.Resilient;
 import com.google.common.collect.Lists;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -525,7 +526,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         GlStateManager.scale(var9, var9, var9);
         this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
         GlStateManager.popMatrix();
-        String var10 = "Minecraft 1.8";
+        // ==== Resilient ==== \\
+        String var10 = Resilient.CLIENT_TITLE + " " + Resilient.STAGE;
 
         if (this.mc.isDemo())
         {
