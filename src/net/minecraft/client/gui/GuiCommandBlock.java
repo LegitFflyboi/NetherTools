@@ -184,7 +184,7 @@ public class GuiCommandBlock extends GuiScreen
         else
         {
             this.field_175390_s.displayString = "X";
-            this.field_146486_g.setText("-");
+            this.field_146486_g.setText("null");
         }
     }
 }

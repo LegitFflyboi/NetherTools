@@ -534,14 +534,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IThre
 
                     if (var5 > 2000L && this.currentTime - this.timeOfLastWarning >= 15000L)
                     {
-                        logger.warn("Can\'t keep up! Did the system time change, or is the server overloaded? Running {}ms behind, skipping {} tick(s)", new Object[] {Long.valueOf(var5), Long.valueOf(var5 / 50L)});
                         var5 = 2000L;
                         this.timeOfLastWarning = this.currentTime;
                     }
 
                     if (var5 < 0L)
                     {
-                        logger.warn("Time ran backwards! Did the system time change?");
                         var5 = 0L;
                     }
 
@@ -1109,7 +1107,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IThre
      */
     public boolean isDemo()
     {
-        return this.isDemo;
+        return false;
     }
 
     /**
@@ -1117,7 +1115,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IThre
      */
     public void setDemo(boolean demo)
     {
-        this.isDemo = demo;
+        this.isDemo = false;
     }
 
     public void canCreateBonusChest(boolean enable)

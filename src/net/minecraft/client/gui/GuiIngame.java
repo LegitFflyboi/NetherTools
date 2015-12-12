@@ -569,7 +569,7 @@ public class GuiIngame extends Gui
         {
             Score var8 = (Score)var7.next();
             ScorePlayerTeam var9 = var3.getPlayersTeam(var8.getPlayerName());
-            var10 = ScorePlayerTeam.formatPlayerName(var9, var8.getPlayerName()) + ": " + EnumChatFormatting.RED + var8.getScorePoints();
+            var10 = ScorePlayerTeam.formatPlayerName(var9, var8.getPlayerName()) + ": " + EnumChatFormatting.GREEN + var8.getScorePoints();
         }
 
         int var22 = var21.size() * this.func_175179_f().FONT_HEIGHT;
