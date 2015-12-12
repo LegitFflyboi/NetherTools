@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="libraries/com/google/guava/guava/17.0/guava-17.0.jar"/>
 	<classpathentry kind="lib" path="libraries/com/ibm/icu/icu4j-core-mojang/51.2/icu4j-core-mojang-51.2.jar"/>
 	<classpathentry kind="lib" path="libraries/com/mojang/authlib/1.5.21/authlib-1.5.21.jar"/>
-	<classpathentry kind="lib" path="libraries/com/mojang/realms/1.6.1/realms-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libraries/com/paulscode/codecjorbis/20101023/codecjorbis-20101023.jar"/>
 	<classpathentry kind="lib" path="libraries/com/paulscode/codecwav/20101023/codecwav-20101023.jar"/>
 	<classpathentry kind="lib" path="libraries/com/paulscode/libraryjavasound/20101123/libraryjavasound-20101123.jar"/>
@@ -28,13 +27,14 @@
 	<classpathentry kind="lib" path="libraries/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar"/>
 	<classpathentry kind="lib" path="libraries/org/apache/logging/log4j/log4j-api/2.0-beta9/log4j-api-2.0-beta9.jar"/>
 	<classpathentry kind="lib" path="libraries/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar"/>
-	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl/lwjgl/2.9.1/lwjgl-2.9.1.jar">
+	<classpathentry kind="lib" path="libraries/tv/twitch/twitch/6.5/twitch-6.5.jar"/>
+	<classpathentry kind="lib" path="libraries/com/mojang/realms/1.6.1/realms-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl-platform-2.9.1-natives-linux.jar"/>
+	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Resilient/libraries/natives"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl/lwjgl_util/2.9.1/lwjgl_util-2.9.1.jar"/>
-	<classpathentry kind="lib" path="libraries/org/lwjgl/lwjgl/lwjgl-platform/2.9.1/lwjgl-platform-2.9.1-natives-linux.jar"/>
-	<classpathentry kind="lib" path="libraries/tv/twitch/twitch/6.5/twitch-6.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

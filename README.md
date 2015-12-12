@@ -1,7 +1,5 @@
-# Minecraft Decompiled 1.8 (MCP 1.9)
-####You're welcome
+# Resilient
+####Cracked Client
 ```java
-//TROLOLOLOLOLOLO
+//Resilient
 ```
-### To Do:
-- Clone to Resilient-MC
