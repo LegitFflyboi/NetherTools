@@ -323,7 +323,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private final Thread mcThread = Thread.currentThread();
     private ModelManager modelManager;
     private BlockRendererDispatcher field_175618_aM;
-
+    
+    // ==== Resilient ==== \\
+    public org.cloudchan.resilient.core.Main resilient;
+    
     /**
      * Set to true to keep the game loop running. Set to false by shutdown() to allow the game loop to exit cleanly.
      */
@@ -369,13 +372,16 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.fullscreen = p_i45547_1_.field_178743_b.field_178763_c;
         this.jvm64bit = isJvm64bit();
         this.theIntegratedServer = new IntegratedServer(this);
+        this.resilient = new org.cloudchan.resilient.core.Main(this);
 
         if (p_i45547_1_.field_178742_e.field_178754_a != null)
         {
             this.serverName = p_i45547_1_.field_178742_e.field_178754_a;
             this.serverPort = p_i45547_1_.field_178742_e.field_178753_b;
         }
-
+        
+        this.resilient.consoleOut(this.getClass(), "Implementation success! Version: " + this.resilient.VERSION);
+        
         ImageIO.setUseCache(false);
         Bootstrap.register();
     }
@@ -609,7 +615,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void func_175609_am() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Minecraft 1.8");
+        Display.setTitle(org.cloudchan.resilient.core.Main.NAME + " " + org.cloudchan.resilient.core.Main.VERSION);
 
         try
         {

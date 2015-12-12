@@ -65,7 +65,7 @@ public class Realms
 
     public static int survivalId()
     {
-        return WorldSettings.GameType.SURVIVAL.getID();
+        return WorldSettings.GameType.CREATIVE.getID();
     }
 
     public static int creativeId()
@@ -75,6 +75,6 @@ public class Realms
 
     public static int adventureId()
     {
-        return WorldSettings.GameType.ADVENTURE.getID();
+        return WorldSettings.GameType.CREATIVE.getID();
     }
 }

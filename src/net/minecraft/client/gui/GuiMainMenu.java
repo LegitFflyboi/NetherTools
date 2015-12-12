@@ -27,6 +27,7 @@ import net.minecraft.world.storage.WorldInfo;
 import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.cloudchan.resilient.core.SettingsMenu;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
@@ -68,6 +69,12 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     private int field_92021_u;
     private int field_92020_v;
     private int field_92019_w;
+    private float logo_red;
+    private float logo_green;
+    private float logo_blue;
+    private boolean logo_ring;
+    private boolean logo_ging;
+    private boolean logo_bing;
     private ResourceLocation field_110351_G;
     private GuiButton field_175372_K;
     private static final String __OBFID = "CL_00001154";
@@ -75,7 +82,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public GuiMainMenu()
     {
         this.field_146972_A = field_96138_a;
-        this.splashText = "missingno";
+        this.splashText = "";
         BufferedReader var1 = null;
 
         try
@@ -98,7 +105,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             {
                 do
                 {
-                    this.splashText = (String)var2.get(field_175374_h.nextInt(var2.size()));
+                    //this.splashText = (String)var2.get(field_175374_h.nextInt(var2.size()));
                 }
                 while (this.splashText.hashCode() == 125780783);
             }
@@ -158,7 +165,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
+    @SuppressWarnings("unchecked")
+	public void initGui()
     {
         this.viewportTexture = new DynamicTexture(256, 256);
         this.field_110351_G = this.mc.getTextureManager().getDynamicTextureLocation("background", this.viewportTexture);
@@ -184,23 +192,21 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         else if (var1.get(2) + 1 == 10 && var1.get(5) == 31)
         {
             this.splashText = "OOoooOOOoooo! Spooky!";
+        } else {
+        	this.splashText = "";
         }
 
         boolean var2 = true;
         int var3 = this.height / 4 + 48;
 
-        if (this.mc.isDemo())
-        {
-            this.addDemoButtons(var3, 24);
-        }
-        else
-        {
-            this.addSingleplayerMultiplayerButtons(var3, 24);
-        }
-
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var3 + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
-        this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var3 + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
-        this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var3 + 72 + 12));
+        this.addSingleplayerMultiplayerButtons();
+        
+        this.buttonList.add(new GuiButton(0, this.width-120, 3, 60, 20, I18n.format("menu.options", new Object[0])));
+        this.buttonList.add(new GuiButton(4, this.width-54, 3, 50, 20, I18n.format("menu.quit", new Object[0])));
+        
+        // Remove annoying language button
+        // this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, var3 + 72 + 12));
+        
         Object var4 = this.field_104025_t;
 
         synchronized (this.field_104025_t)
@@ -218,27 +224,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     /**
      * Adds Singleplayer and Multiplayer buttons on Main Menu for players who have bought the game.
      */
-    private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
+    @SuppressWarnings("unchecked")
+	private void addSingleplayerMultiplayerButtons()
     {
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
-        this.buttonList.add(this.field_175372_K = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0])));
-    }
-
-    /**
-     * Adds Demo buttons on Main Menu for players who are playing Demo.
-     */
-    private void addDemoButtons(int p_73972_1_, int p_73972_2_)
-    {
-        this.buttonList.add(new GuiButton(11, this.width / 2 - 100, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
-        this.buttonList.add(this.buttonResetDemo = new GuiButton(12, this.width / 2 - 100, p_73972_1_ + p_73972_2_ * 1, I18n.format("menu.resetdemo", new Object[0])));
-        ISaveFormat var3 = this.mc.getSaveLoader();
-        WorldInfo var4 = var3.getWorldInfo("Demo_World");
-
-        if (var4 == null)
-        {
-            this.buttonResetDemo.enabled = false;
-        }
+        this.buttonList.add(new GuiButton(1,4, 3, 60, 20, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, 70, 3, 50, 20, I18n.format("menu.multiplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(14, 126, 3, 60, 20, "§bResilient§r"));
+        
     }
 
     protected void actionPerformed(GuiButton button) throws IOException
@@ -246,11 +238,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         if (button.id == 0)
         {
             this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
-        }
-
-        if (button.id == 5)
-        {
-            this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));
         }
 
         if (button.id == 1)
@@ -263,9 +250,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             this.mc.displayGuiScreen(new GuiMultiplayer(this));
         }
 
-        if (button.id == 14 && this.field_175372_K.visible)
+        if (button.id == 14)
         {
-            this.switchToRealms();
+            // Launch Resilient Options
+        	this.mc.displayGuiScreen(new SettingsMenu(this));
         }
 
         if (button.id == 4)
@@ -273,28 +261,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             this.mc.shutdown();
         }
 
-        if (button.id == 11)
-        {
-            this.mc.launchIntegratedServer("Demo_World", "Demo_World", DemoWorldServer.demoWorldSettings);
-        }
-
-        if (button.id == 12)
-        {
-            ISaveFormat var2 = this.mc.getSaveLoader();
-            WorldInfo var3 = var2.getWorldInfo("Demo_World");
-
-            if (var3 != null)
-            {
-                GuiYesNo var4 = GuiSelectWorld.func_152129_a(this, var3.getWorldName(), 12);
-                this.mc.displayGuiScreen(var4);
-            }
-        }
-    }
-
-    private void switchToRealms()
-    {
-        RealmsBridge var1 = new RealmsBridge();
-        var1.switchToRealms(this);
     }
 
     public void confirmClicked(boolean result, int id)
@@ -303,7 +269,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         {
             ISaveFormat var6 = this.mc.getSaveLoader();
             var6.flushCache();
-            var6.deleteWorldDirectory("Demo_World");
             this.mc.displayGuiScreen(this);
         }
         else if (id == 13)
@@ -357,8 +322,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             float var9 = ((float)(var7 / var6) / (float)var6 - 0.5F) / 64.0F;
             float var10 = 0.0F;
             GlStateManager.translate(var8, var9, var10);
-            GlStateManager.rotate(MathHelper.sin(((float)this.panoramaTimer + p_73970_3_) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
-            GlStateManager.rotate(-((float)this.panoramaTimer + p_73970_3_) * 0.1F, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(MathHelper.sin(((float)this.panoramaTimer + p_73970_3_) / 30.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotate(-((float)this.panoramaTimer + p_73970_3_) * -1.3F, 0.0F, 1.0F, 0.0F);
 
             for (int var11 = 0; var11 < 6; ++var11)
             {
@@ -417,9 +382,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Rotate and blurs the skybox view in the main menu
+     * Rotate the skybox view in the main menu
      */
-    private void rotateAndBlurSkybox(float p_73968_1_)
+    private void rotateSkybox()
     {
         this.mc.getTextureManager().bindTexture(this.field_110351_G);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
@@ -434,18 +399,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         GlStateManager.disableAlpha();
         byte var4 = 3;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
-            var3.func_178960_a(1.0F, 1.0F, 1.0F, 1.0F / (float)(var5 + 1));
-            int var6 = this.width;
-            int var7 = this.height;
-            float var8 = (float)(var5 - var4 / 2) / 256.0F;
-            var3.addVertexWithUV((double)var6, (double)var7, (double)this.zLevel, (double)(0.0F + var8), 1.0D);
-            var3.addVertexWithUV((double)var6, 0.0D, (double)this.zLevel, (double)(1.0F + var8), 1.0D);
-            var3.addVertexWithUV(0.0D, 0.0D, (double)this.zLevel, (double)(1.0F + var8), 0.0D);
-            var3.addVertexWithUV(0.0D, (double)var7, (double)this.zLevel, (double)(0.0F + var8), 0.0D);
-        }
-
         var2.draw();
         GlStateManager.enableAlpha();
         GlStateManager.colorMask(true, true, true, true);
@@ -459,13 +412,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         this.mc.getFramebuffer().unbindFramebuffer();
         GlStateManager.viewport(0, 0, 256, 256);
         this.drawPanorama(p_73971_1_, p_73971_2_, p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
-        this.rotateAndBlurSkybox(p_73971_3_);
+        this.rotateSkybox();
         this.mc.getFramebuffer().bindFramebuffer(true);
         GlStateManager.viewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
         Tessellator var4 = Tessellator.getInstance();
@@ -495,12 +442,45 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         Tessellator var4 = Tessellator.getInstance();
         WorldRenderer var5 = var4.getWorldRenderer();
         short var6 = 274;
+        
+        // Logo Width
         int var7 = this.width / 2 - var6 / 2;
-        byte var8 = 30;
-        this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
-        this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
+        
+        // Logo Height
+        int var8 = (this.height/2)-30;
+        
+        // Color speed
+        float colorspeed = 0.2f;
+        //this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
+        //this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
         this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        
+        GlStateManager.color(logo_red, logo_green, logo_blue, 1.0F);
+        
+        if (logo_red > 1.0f){logo_ring = false;}
+        if (logo_green > 1.0f){logo_ging = false;}
+        if (logo_blue > 1.0f){logo_bing = false;}
+        if (logo_red < 0.0f){logo_ring = true;}
+        if (logo_green < 0.0f){logo_ging = true;}
+        if (logo_blue < 0.0f){logo_bing = true;}
+        
+        if(logo_ring){
+        	logo_red += (colorspeed * 0.02f);
+        } else {
+        	logo_red -= (colorspeed * 0.1f);
+        }
+        
+        if(logo_ging){
+        	logo_green += (colorspeed * 0.1f);
+        } else {
+        	logo_green -= (colorspeed * 0.06f);
+        }
+        
+        if(logo_bing){
+        	logo_blue += (colorspeed * 0.3f);
+        } else {
+        	logo_blue -= (colorspeed * 0.02f);
+        }
 
         if ((double)this.updateCounter < 1.0E-4D)
         {
@@ -519,29 +499,39 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         var5.func_178991_c(-1);
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)(this.width / 2 + 90), 70.0F, 0.0F);
-        GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
+        
         float var9 = 1.8F - MathHelper.abs(MathHelper.sin((float)(Minecraft.getSystemTime() % 1000L) / 1000.0F * (float)Math.PI * 2.0F) * 0.1F);
-        var9 = var9 * 100.0F / (float)(this.fontRendererObj.getStringWidth(this.splashText) + 32);
-        GlStateManager.scale(var9, var9, var9);
-        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
+        var9 = var9 * 100.0F / (float)(this.fontRendererObj.getStringWidth(this.splashText) + 10);
+        GlStateManager.scale(var9/2, var9/2, var9/2);
+        
+        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, 252);
         GlStateManager.popMatrix();
-        String var10 = "Minecraft 1.8";
-
-        if (this.mc.isDemo())
-        {
-            var10 = var10 + " Demo";
-        }
-
+        
+        String var10 = "§7Minecraft 1.8 (Cheats: " + this.mc.resilient.getColoredStatus().toUpperCase() + "§7)§r";
         this.drawString(this.fontRendererObj, var10, 2, this.height - 10, -1);
-        String var11 = "Copyright Mojang AB. Do not distribute!";
+        
+        String var11 = "§b§nhttps://cloudchan.org/§r";
         this.drawString(this.fontRendererObj, var11, this.width - this.fontRendererObj.getStringWidth(var11) - 2, this.height - 10, -1);
-
-        if (this.field_92025_p != null && this.field_92025_p.length() > 0)
-        {
-            drawRect(this.field_92022_t - 2, this.field_92021_u - 2, this.field_92020_v + 2, this.field_92019_w - 1, 1428160512);
-            this.drawString(this.fontRendererObj, this.field_92025_p, this.field_92022_t, this.field_92021_u, -1);
-            this.drawString(this.fontRendererObj, this.field_146972_A, (this.width - this.field_92024_r) / 2, ((GuiButton)this.buttonList.get(0)).yPosition - 12, -1);
-        }
+        
+        String var12 = "§5Founded by Notch§r";
+        this.drawString(this.fontRendererObj, var12, 2, this.height - 20, -1);
+        
+        String var13 = "§c§mMicrosoft(c)§r";
+        this.drawString(this.fontRendererObj, var13, 2, this.height - 30, -1);
+        
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(1.8f,2.4f,1.0f);
+        GlStateManager.translate(16.5f, 0.0f, 0.0f);
+        
+        int x = (this.width / 4);
+        int y = (this.height / 4);
+        //this.drawString(this.fontRendererObj, "§6§l" + this.mc.resilient.NAME + " " + this.mc.resilient.VERSION + "§r", x, y, -1);
+        this.drawCenteredString(this.fontRendererObj, "§2§l" + this.mc.resilient.NAME + " " + this.mc.resilient.VERSION + "§r", x, y, -1);
+        
+        GlStateManager.popMatrix();
+        
+        // Draw top navbar
+        drawRect(0, 0, this.width, 25, 1428160502);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
