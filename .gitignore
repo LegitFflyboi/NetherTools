@@ -1,6 +1,6 @@
-*crash-reports/
+*crash-reports*
+*.temp*
 *.project*
-*.settings/*
 *.settings*
-*bin/*
+*saves/*
 *bin*
