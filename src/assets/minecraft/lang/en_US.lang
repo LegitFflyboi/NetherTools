@@ -1,4 +1,3 @@
-
 language.name=English
 language.region=US
 language.code=en_US
@@ -1902,10 +1901,10 @@ advMode.nearestPlayer=Use "@p" to target nearest player
 advMode.randomPlayer=Use "@r" to target random player
 advMode.allPlayers=Use "@a" to target all players
 advMode.allEntities=Use "@e" to target all entities
-advMode.previousOutput=Previous Output
+advMode.previousOutput=Output
 
 advMode.notEnabled=Command blocks are not enabled on this server
-advMode.notAllowed=Must be an opped player in creative mode
+advMode.notAllowed=Must be an operator who is in creative mode
 
 mount.onboard=Press %1$s to dismount
 

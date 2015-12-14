@@ -11,6 +11,7 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.cloudchan.resilient.utils.Wrapper;
 
 public class GuiNewChat extends Gui
 {
@@ -211,7 +212,7 @@ public class GuiNewChat extends Gui
     {
         if (this.sentMessages.isEmpty() || !((String)this.sentMessages.get(this.sentMessages.size() - 1)).equals(p_146239_1_))
         {
-            this.sentMessages.add(p_146239_1_);
+        	this.sentMessages.add(p_146239_1_);
         }
     }
 
