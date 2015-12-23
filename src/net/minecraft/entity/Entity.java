@@ -1045,7 +1045,7 @@ public abstract class Entity implements ICommandSender
      */
     public AxisAlignedBB getBoundingBox()
     {
-        return null;
+        return this.boundingBox;
     }
 
     /**

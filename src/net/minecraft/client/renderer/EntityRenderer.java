@@ -55,6 +55,8 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.cloudchan.resilient.core.CheatModuleManager;
+import org.cloudchan.resilient.utils.CheatModule;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -1453,7 +1455,10 @@ public class EntityRenderer implements IResourceManagerReloadListener
         else
         {
             this.mc.mcProfiler.endStartSection("translucent");
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             var5.func_174977_a(EnumWorldBlockLayer.TRANSLUCENT, (double)p_175068_2_, p_175068_1_, var9);
+            GlStateManager.disableBlend();
         }
 
         GlStateManager.shadeModel(7424);
@@ -1470,6 +1475,14 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.mc.mcProfiler.endStartSection("hand");
 
+        
+        // TODO: Resilient
+        for(CheatModule m : CheatModuleManager.getModules()){
+        	m.onRender();
+        }
+        
+        
+        
         if (this.field_175074_C)
         {
             GlStateManager.clear(256);

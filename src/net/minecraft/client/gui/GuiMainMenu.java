@@ -13,7 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.io.Charsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.cloudchan.resilient.core.SettingsMenu;
+import org.cloudchan.resilient.gui.SettingsMenu;
+import org.cloudchan.resilient.utils.Utils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
@@ -484,8 +485,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
 		this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, 252);
 		GlStateManager.popMatrix();
-
-		String var10 = "§7Minecraft 1.8 (Cheats: " + this.mc.resilient.getColoredStatus().toUpperCase() + "§7)§r";
+		
+		String var10 = "§7Minecraft 1.8 (Hacks: " + this.mc.resilient.getColoredStatus() + "§7)§r";
 		this.drawString(this.fontRendererObj, var10, 2, this.height - 10, -1);
 
 		String var11 = "§b§nhttps://cloudchan.org/§r";
@@ -510,8 +511,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		GlStateManager.popMatrix();
 
 		// Draw top navbar
-		drawRect(0, 0, this.width, 25, 1428160502);
-
+		drawRect(0, 0, this.width, 25, 0x5000FFDD);
+		
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 

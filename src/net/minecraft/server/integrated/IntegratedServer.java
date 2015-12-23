@@ -266,11 +266,6 @@ public class IntegratedServer extends MinecraftServer {
 		}
 	}
 
-	public void addServerStatsToSnooper(PlayerUsageSnooper playerSnooper) {
-		super.addServerStatsToSnooper(playerSnooper);
-		playerSnooper.addClientStat("snooper_partner", this.mc.getPlayerUsageSnooper().getUniqueID());
-	}
-
 	/**
 	 * Returns whether snooping is enabled or not.
 	 */
