@@ -265,7 +265,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 	public void onUpdate() {
 		
 		//TODO: Resilient
-		for(CheatModule m : CheatModuleManager.cheats.values()){
+		for(CheatModule m : CheatModuleManager.getModules()){
 			m.onUpdate();
 		}
 		

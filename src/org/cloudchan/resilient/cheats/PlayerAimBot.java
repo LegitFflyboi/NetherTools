@@ -15,7 +15,7 @@ import net.minecraft.util.EnumChatFormatting;
 public class PlayerAimBot extends CheatModule {
 
 	public PlayerAimBot() {
-		super("PlayerAimBot", -1, Category.COMBAT);
+		super("PlayerAimBot", Keyboard.KEY_P, Category.COMBAT);
 	}
 	
 	@Override
@@ -28,11 +28,11 @@ public class PlayerAimBot extends CheatModule {
 					
 					EntityPlayer entityplayer = (EntityPlayer) entities.get(1);
 					
-					if (!Wrapper.mc.thePlayer.canEntityBeSeen(entityplayer)) {
+					if (entityplayer.getName().equalsIgnoreCase(Wrapper.mc.thePlayer.getName())) {
 						continue;
 					}
 					
-					if (entityplayer.getName().equalsIgnoreCase(Wrapper.mc.thePlayer.getName())) {
+					if (friendListHasPlayerNameIgnoreCase(entityplayer.getName())) {
 						continue;
 					}
 					
@@ -40,7 +40,7 @@ public class PlayerAimBot extends CheatModule {
 						entityplayer = (EntityPlayer) entities.get(i);
 					}
 					
-					if (Wrapper.mc.thePlayer.getDistanceToEntity(entityplayer) > 15){
+					if (Wrapper.mc.thePlayer.getDistanceToEntity(entityplayer) > 18F){
 						continue;
 					}
 
@@ -51,6 +51,14 @@ public class PlayerAimBot extends CheatModule {
 	}
 	
 	
-	
+	private boolean friendListHasPlayerNameIgnoreCase(String playername) {
+		for (int i = 0; i < Wrapper.mc.resilient.getFriendList().size(); i++) {
+			String player = (String) Wrapper.mc.resilient.getFriendList().get(i);
+			if (playername.equalsIgnoreCase(player)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

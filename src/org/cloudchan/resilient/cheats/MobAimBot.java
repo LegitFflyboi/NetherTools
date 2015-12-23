@@ -18,7 +18,7 @@ import net.minecraft.util.EnumChatFormatting;
 public class MobAimBot extends CheatModule {
 
 	public MobAimBot() {
-		super("MobAimBot", -1, Category.COMBAT);
+		super("MobAimBot", Category.COMBAT);
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class MobAimBot extends CheatModule {
 						continue;
 					}
 				
-					if (Wrapper.mc.thePlayer.getDistanceToEntity(entity) > 10.0F){
+					if (Wrapper.mc.thePlayer.getDistanceToEntity(entity) > 18.0F){
 						continue;
 					}
 					

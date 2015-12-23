@@ -15,7 +15,7 @@ public class PlayerAura extends CheatModule {
 	private int delay;
 
 	public PlayerAura() {
-		super("PlayerAura", Keyboard.KEY_P, Category.COMBAT);
+		super("PlayerAura", Category.COMBAT);
 	}
 
 	@Override
@@ -33,32 +33,32 @@ public class PlayerAura extends CheatModule {
 
 		for (int k = 0; k < list.size(); k++) {
 			EntityPlayer entityPlayer = (EntityPlayer) list.get(k);
+			if(Wrapper.mc.thePlayer.getDistanceToEntity(entityPlayer) < 4F){
+				if (entityPlayer.getName().equalsIgnoreCase(Wrapper.mc.thePlayer.getName())) {
+					continue;
+				}
 
-			if (entityPlayer.getName().equalsIgnoreCase(Wrapper.mc.thePlayer.getName())) {
-				continue;
-			}
+				if (friendListHasPlayerNameIgnoreCase(entityPlayer.getName())) {
+					continue;
+				}
 
-			if (friendListHasPlayerNameIgnoreCase(entityPlayer.getName())) {
-				continue;
-			}
+				if (((EntityPlayer) list.get(k)).getName() == Wrapper.mc.thePlayer.getName()) {
+					continue;
+				}
 
-			if (((EntityPlayer) list.get(k)).getName() == Wrapper.mc.thePlayer.getName()) {
-				continue;
+				if (delay > 2) {
+					Wrapper.mc.playerController.attackEntity(Wrapper.mc.thePlayer, entityPlayer);
+					Wrapper.mc.thePlayer.swingItem();
+					delay = 0;
+					continue;
+				}
 			}
-			
-			if (Wrapper.mc.thePlayer.getDistanceToEntity(entityPlayer) < 4F && delay > 2) {
-				Wrapper.mc.playerController.attackEntity(Wrapper.mc.thePlayer, entityPlayer);
-				Wrapper.mc.thePlayer.swingItem();
-				delay = 0;
-				continue;
-			}
-			
 		}
 	}
 
 	private boolean friendListHasPlayerNameIgnoreCase(String playername) {
-		for (int i = 0; i < Wrapper.mc.resilient.friendList().size(); i++) {
-			String player = (String) Wrapper.mc.resilient.friendList().get(i);
+		for (int i = 0; i < Wrapper.mc.resilient.getFriendList().size(); i++) {
+			String player = (String) Wrapper.mc.resilient.getFriendList().get(i);
 			if (playername.equalsIgnoreCase(player)) {
 				return true;
 			}

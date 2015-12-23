@@ -7,7 +7,7 @@ import org.cloudchan.resilient.utils.Wrapper;
 public class Rage extends CheatModule {
 	
 	public Rage(){
-		super("Rage", -1, Category.PLAYER);
+		super("Rage", Category.PLAYER);
 	}
 	
 	@Override

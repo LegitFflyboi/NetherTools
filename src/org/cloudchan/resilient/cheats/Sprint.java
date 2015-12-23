@@ -3,9 +3,8 @@ package org.cloudchan.resilient.cheats;
 import org.cloudchan.resilient.utils.Category;
 import org.cloudchan.resilient.utils.CheatModule;
 import org.cloudchan.resilient.utils.Wrapper;
+import net.minecraft.util.*;
 import org.lwjgl.input.Keyboard;
-
-import net.minecraft.util.EnumChatFormatting;
 
 public class Sprint extends CheatModule {
 
@@ -16,7 +15,9 @@ public class Sprint extends CheatModule {
 	@Override
 	public void onUpdate(){
 		if(this.isEnabled()){
-			Wrapper.mc.thePlayer.setSprinting(true);
+			if(!Wrapper.mc.thePlayer.isSprinting()){
+				Wrapper.mc.thePlayer.setSprinting(true);
+			}
 		}
 	}
 	

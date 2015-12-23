@@ -217,7 +217,7 @@ public class Minecraft implements IThreadListener {
 	private CrashReport crashReporter;
 	public int displayWidth;
 	public int displayHeight;
-	private Timer timer = new Timer(20.0F);
+	public Timer timer = new Timer(20.0F);
 
 	public WorldClient theWorld;
 	public RenderGlobal renderGlobal;
@@ -1710,8 +1710,8 @@ public class Minecraft implements IThreadListener {
 					} else {
 						
 						// TODO: Resilient
-						for(CheatModule m : CheatModuleManager.cheats.values()){
-							if(var1 == m.getKeyBind()){
+						for(CheatModule m : CheatModuleManager.getModules()){
+							if(var1 == m.getKeyBind() && this.resilient.isEnabled()){
 								m.toggle();
 							}
 						}

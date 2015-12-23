@@ -1,32 +1,40 @@
 package org.cloudchan.resilient.core;
 
-import java.util.HashMap;
-
+import java.util.ArrayList;
 import org.cloudchan.resilient.cheats.*;
 import org.cloudchan.resilient.utils.CheatModule;
 
 public class CheatModuleManager {
 	
-	public static HashMap<String,CheatModule> cheats = new HashMap<String,CheatModule>();
+	private static ArrayList<CheatModule> cheats = new ArrayList<CheatModule>();
 	
 	public CheatModuleManager(){
-		cheats.put("sprint", new Sprint());
-		cheats.put("fullbright", new FullBright());
-		cheats.put("rage", new Rage());
-		cheats.put("playeraura", new PlayerAura());
-		cheats.put("mobaura", new MobAura());
-		cheats.put("playeraimbot", new PlayerAimBot());
-		cheats.put("mobaimbot", new MobAimBot());
-		cheats.put("fly", new Fly());
-		cheats.put("fastplace", new FastPlace());
-		
-		
-		
+		cheats.add(new Sprint());
+		cheats.add(new FullBright());
+		cheats.add(new Rage());
+		cheats.add(new PlayerAura());
+		cheats.add(new MobAura());
+		cheats.add(new PlayerAimBot());
+		cheats.add(new MobAimBot());
+		cheats.add(new Fly());
+		cheats.add(new FastPlace());
+		cheats.add(new FastBreak());
+		cheats.add(new PlayerTracer());
+		cheats.add(new MobTracer());
+		cheats.add(new PlayerESP());
+		cheats.add(new MobESP());
+		cheats.add(new BowBot());
 	}
 	
-	public static CheatModule getModule(String name){
-		if(cheats.containsKey(name)){
-			return cheats.get(name);
+	public static ArrayList<CheatModule> getModules(){
+		return cheats;
+	}
+	
+	public static CheatModule getModule(Class <?extends CheatModule> clazz){
+		for(CheatModule mod : getModules()){
+			if(mod.getClass() == clazz){
+				return mod;
+			}
 		}
 		return null;
 	}

@@ -1,20 +1,27 @@
 package net.minecraft.client.gui;
 
-import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.cloudchan.resilient.core.CheatModuleManager;
+import org.cloudchan.resilient.gui.HackCommands;
+import org.cloudchan.resilient.utils.CheatModule;
+import org.cloudchan.resilient.utils.Wrapper;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
+import com.google.common.collect.Lists;
+
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 public class GuiChat extends GuiScreen {
 	private static final Logger logger = LogManager.getLogger();
@@ -94,7 +101,7 @@ public class GuiChat extends GuiScreen {
 
 		if (keyCode == 1) {
 			this.mc.displayGuiScreen((GuiScreen) null);
-		} else if (keyCode != 28 && keyCode != 156) {
+		} else if (keyCode != Keyboard.KEY_RETURN && keyCode != 156) {
 			if (keyCode == 200) {
 				this.getSentHistory(-1);
 			} else if (keyCode == 208) {
@@ -108,9 +115,19 @@ public class GuiChat extends GuiScreen {
 			}
 		} else {
 			String var3 = this.inputField.getText().trim();
-
 			if (var3.length() > 0) {
-				this.func_175275_f(var3);
+				
+				// TODO: Resilient
+				if(!var3.startsWith(".")){
+					this.func_175275_f(var3);
+				} else {
+					var3 = var3.replaceAll("\\s+", " ");
+					var3 = var3.substring(1);
+					Wrapper.mc.resilient.consoleOut(this.getClass(), "[IMP] " + var3);
+					
+					HackCommands.validate(var3);
+				}
+				
 			}
 
 			this.mc.displayGuiScreen((GuiScreen) null);

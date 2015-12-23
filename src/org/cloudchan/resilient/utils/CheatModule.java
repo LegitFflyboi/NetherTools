@@ -15,6 +15,13 @@ public class CheatModule {
 		this.enabled = false;
 	}
 	
+	public CheatModule(String cheatname, Category category){
+		this.cheatname = cheatname;
+		this.keybind = -1;
+		this.category = category;
+		this.enabled = false;
+	}
+	
 	public String getCheatName(){
 		return cheatname;
 	}

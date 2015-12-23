@@ -15,6 +15,10 @@ public class Fly extends CheatModule {
 	public void onUpdate() {
 		if (this.isEnabled()) {
 			Wrapper.mc.thePlayer.capabilities.isFlying = true;
+			Wrapper.mc.thePlayer.fallDistance = 0.0f;
+			Wrapper.mc.thePlayer.setJumping(true);
+			Wrapper.mc.thePlayer.setAIMoveSpeed(6.0f);
+			Wrapper.mc.thePlayer.fall(0, 0);
 		}
 		if(Wrapper.mc.thePlayer.onGround){
 			Wrapper.mc.thePlayer.capabilities.isFlying = false;
@@ -24,6 +28,9 @@ public class Fly extends CheatModule {
 	@Override
 	public void onDisable() {
 		Wrapper.mc.thePlayer.capabilities.isFlying = false;
+		Wrapper.mc.thePlayer.fallDistance = 0.0f;
+		Wrapper.mc.thePlayer.setJumping(false);
+		Wrapper.mc.thePlayer.fall(1, 0);
 	}
 
 }

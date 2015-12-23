@@ -1,5 +1,6 @@
 package net.minecraft.client.entity;
 
+import org.cloudchan.resilient.cheats.Sprint;
 import org.cloudchan.resilient.core.CheatModuleManager;
 import org.cloudchan.resilient.utils.CheatModule;
 
@@ -135,7 +136,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
 
 			
 			//TODO: Resilient
-			for(CheatModule m : CheatModuleManager.cheats.values()){
+			for(CheatModule m : CheatModuleManager.getModules()){
 				m.onUpdate();
 			}
 			
@@ -682,7 +683,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
 		
 		if (this.isSprinting() && (this.movementInput.moveForward < var3 || this.isCollidedHorizontally || !var5)) {
 			// TODO: Resilient
-			if(!CheatModuleManager.getModule("sprint").isEnabled()){
+			if(!CheatModuleManager.getModule(Sprint.class).isEnabled()){
 				this.setSprinting(false);
 			}
 		}

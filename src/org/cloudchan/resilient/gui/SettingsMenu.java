@@ -40,7 +40,7 @@ public class SettingsMenu extends GuiScreen implements GuiYesNoCallback {
 				// Toggle Cheats
 				this.mc.resilient.setEnabled(!this.mc.resilient.isEnabled());
 				if(!this.mc.resilient.isEnabled()){
-					for(CheatModule m : CheatModuleManager.cheats.values()){
+					for(CheatModule m : CheatModuleManager.getModules()){
 						m.setEnabled(false);
 					}
 				}

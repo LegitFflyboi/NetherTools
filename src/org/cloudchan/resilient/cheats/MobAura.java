@@ -18,7 +18,7 @@ public class MobAura extends CheatModule {
 	private int delay;
 
 	public MobAura() {
-		super("MobAura", -1, Category.COMBAT);
+		super("MobAura", Category.COMBAT);
 	}
 
 	@Override
